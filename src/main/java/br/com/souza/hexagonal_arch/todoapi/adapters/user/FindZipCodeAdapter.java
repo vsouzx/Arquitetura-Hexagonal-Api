@@ -1,9 +1,9 @@
-package br.com.souza.hexagonal_arch.todoapi.adapters;
+package br.com.souza.hexagonal_arch.todoapi.adapters.user;
 
 import br.com.souza.hexagonal_arch.todoapi.adapters.out.client.ViaCepClient;
 import br.com.souza.hexagonal_arch.todoapi.adapters.out.client.dto.ZipCodeResponse;
 import br.com.souza.hexagonal_arch.todoapi.application.core.dtos.ZipCode;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.out.FindZipCodeOutputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindZipCodeOutputPort;
 import org.springframework.stereotype.Component;
 
 @Component

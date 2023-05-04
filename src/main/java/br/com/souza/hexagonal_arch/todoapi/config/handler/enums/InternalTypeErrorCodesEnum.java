@@ -5,7 +5,8 @@ public enum InternalTypeErrorCodesEnum {
     E500000("Internal error without mapped cause."),
     E400001("An user with this e-mail already exists: %s"),
     E400002("Invalid zipCode: %s"),
-    E400003("Bad Request to: %s.");
+    E400003("Bad Request to: %s."),
+    E400004("This user not exists: %s."),;
 
     private final String message;
 

@@ -18,5 +18,4 @@ public class CustomErrorDecoder implements ErrorDecoder {
             return new Exception("Exception: " +  responseStatus);
         }
     }
-
 }

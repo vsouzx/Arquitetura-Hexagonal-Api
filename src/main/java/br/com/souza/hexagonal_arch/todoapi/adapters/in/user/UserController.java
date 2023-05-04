@@ -1,8 +1,8 @@
-package br.com.souza.hexagonal_arch.todoapi.adapters.in;
+package br.com.souza.hexagonal_arch.todoapi.adapters.in.user;
 
-import br.com.souza.hexagonal_arch.todoapi.adapters.in.dto.UserRequest;
+import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.UserRequest;
 import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.in.InsertUserInputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

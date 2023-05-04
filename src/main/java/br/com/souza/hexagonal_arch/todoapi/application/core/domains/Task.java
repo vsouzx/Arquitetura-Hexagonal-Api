@@ -8,12 +8,19 @@ public class Task {
     private String userId;
 
     public Task() {
+        this.isDone = false;
     }
 
     public Task(String id, String message, Boolean isDone, String userId) {
         this.id = id;
         this.message = message;
         this.isDone = isDone;
+        this.userId = userId;
+    }
+
+    public Task(String message, String userId) {
+        this.message = message;
+        this.isDone = false;
         this.userId = userId;
     }
 

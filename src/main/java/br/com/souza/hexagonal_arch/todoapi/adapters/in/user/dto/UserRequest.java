@@ -1,4 +1,4 @@
-package br.com.souza.hexagonal_arch.todoapi.adapters.in.dto;
+package br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

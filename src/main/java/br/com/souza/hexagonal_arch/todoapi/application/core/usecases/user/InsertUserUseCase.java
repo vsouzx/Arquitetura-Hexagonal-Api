@@ -1,10 +1,10 @@
-package br.com.souza.hexagonal_arch.todoapi.application.core.usecases;
+package br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user;
 
 import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 import br.com.souza.hexagonal_arch.todoapi.application.core.dtos.ZipCode;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.in.InsertUserInputPort;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.out.FindZipCodeOutputPort;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.out.InsertUserOutputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindZipCodeOutputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.InsertUserOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.BadRequestException;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.InvalidZipCodeException;
 
