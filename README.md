@@ -1,2 +1,12 @@
-# Arquitetura-Hexagonal-Api
-O foco deste projeto, é aprimorar e botar em prática meus conhecimentos na Arquitetura Hexagonal. Tecnologias e conceitos aplicados: Spring Boot, Spring Data, Spring MVC, Spring Security, Spring Cloud OpenFeign, MongoDB, Autenticação JWT, Exceções personalizadas com GlobalExceptionHandler, Apache Kafka, CustomErrorDecoder no @FeignClient, etc.
+<h1>Arquitetura-Hexagonal-Api</h1>
+<p>O foco deste projeto, é aprimorar e botar em prática meus conhecimentos na <b>Arquitetura Hexagonal</b>.</p> 
+
+<h2>Tecnologias e conceitos aplicados</h2>
+<p>Spring Boot <b>(Data, MVC, Security)</b></p>
+<p>Spring Cloud <b>OpenFeign</b></p>
+<p><b>MongoDB</b></p>
+<p><b>Autenticação JWT</b></p>
+<p>Exceções personalizadas com <b>GlobalExceptionHandler</b></p>
+<p>Mensageria com <b>Apache Kafka</b></p>
+<p><b>CustomErrorDecoder</b> no @FeignClient, para interceptar e tratar os possíveis erros nas requisições.</p>
+<p>Arquitetura Hexagonal <b>(Ports and Adapters)</b>.</p>
