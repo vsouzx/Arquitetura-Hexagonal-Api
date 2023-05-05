@@ -1,4 +1,4 @@
-package br.com.souza.hexagonal_arch.todoapi.config.client;
+package br.com.souza.hexagonal_arch.todoapi.config.openfeign;
 
 import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;

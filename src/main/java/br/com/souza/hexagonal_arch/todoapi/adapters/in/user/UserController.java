@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> register(@Valid @RequestBody UserRequest userRequest) throws Exception{
-        User user = new User(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getEmail());
+        User user = new User(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getEmail(), userRequest.getPassword());
         insertUserInputPort.insertUser(user, userRequest.getZipCode());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

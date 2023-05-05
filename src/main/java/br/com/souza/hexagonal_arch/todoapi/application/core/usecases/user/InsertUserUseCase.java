@@ -3,6 +3,7 @@ package br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user;
 import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 import br.com.souza.hexagonal_arch.todoapi.application.core.dtos.ZipCode;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByEmailOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindZipCodeOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.InsertUserOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.BadRequestException;
@@ -12,15 +13,20 @@ public class InsertUserUseCase implements InsertUserInputPort {
 
     private final InsertUserOutputPort insertUserOutputPort;
     private final FindZipCodeOutputPort findZipCodeOutputPort;
+    private final FindUserByEmailOutputPort findUserByEmailOutputPort;
 
     public InsertUserUseCase(InsertUserOutputPort insertUserOutputPort,
-                             FindZipCodeOutputPort findZipCodeOutputPort) {
+                             FindZipCodeOutputPort findZipCodeOutputPort,
+                             FindUserByEmailOutputPort findUserByEmailOutputPort) {
         this.insertUserOutputPort = insertUserOutputPort;
         this.findZipCodeOutputPort = findZipCodeOutputPort;
+        this.findUserByEmailOutputPort = findUserByEmailOutputPort;
     }
 
     @Override
     public void insertUser(User user, String zipCode) throws Exception{
+
+        findUserByEmailOutputPort.find(user);
 
         ZipCode zipCodeResponse;
         //buscar zipCode, se for inválido, retornar exceção

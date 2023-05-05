@@ -1,4 +1,4 @@
-package br.com.souza.hexagonal_arch.todoapi.config.client;
+package br.com.souza.hexagonal_arch.todoapi.config.openfeign;
 
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.BadRequestException;
 import feign.Response;

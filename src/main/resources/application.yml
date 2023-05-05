@@ -2,3 +2,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/todo-hexag
+
+security:
+  jwtKey: '8BBZT6bKjUxRyLyf*y8u=Q7h94v*GSNA+NCZ#$Z^c-vTaGZ3Jm+$funuELg-922@he9cqFK4+PS#b#USpDXbTWYets7*=VbtLtA5_6VU#mJKDwL3DT^g%k-HvKrQ@c5#'

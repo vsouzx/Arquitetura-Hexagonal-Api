@@ -1,7 +1,7 @@
 package br.com.souza.hexagonal_arch.todoapi.adapters.out.client;
 
 import br.com.souza.hexagonal_arch.todoapi.adapters.out.client.dto.ZipCodeResponse;
-import br.com.souza.hexagonal_arch.todoapi.config.client.FeignClientConfiguration;
+import br.com.souza.hexagonal_arch.todoapi.config.openfeign.FeignClientConfiguration;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.BadRequestException;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

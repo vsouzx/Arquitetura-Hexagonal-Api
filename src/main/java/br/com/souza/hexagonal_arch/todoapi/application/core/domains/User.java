@@ -5,6 +5,7 @@ public class User {
     private String id;
     private String firstName;
     private String lastName;
+    private String password;
     private String email;
     private Boolean isValidEmail;
     private String street;
@@ -13,10 +14,11 @@ public class User {
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, String email, Boolean isValidEmail, String street, String locality) {
+    public User(String id, String firstName, String lastName, String password, String email, Boolean isValidEmail, String street, String locality) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.email = email;
         this.isValidEmail = isValidEmail;
         this.street = street;
@@ -33,10 +35,11 @@ public class User {
         this.locality = locality;
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.isValidEmail = false;
     }
 
@@ -96,4 +99,11 @@ public class User {
         isValidEmail = validEmail;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

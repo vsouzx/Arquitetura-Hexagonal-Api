@@ -8,6 +8,7 @@ import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.task.Insert
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user.InsertUserUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.task.InsertTaskInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByEmailOutputPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,8 +17,9 @@ public class UseCasesConfig {
 
     @Bean
     InsertUserInputPort insertUserInputPort(InsertUserAdapter insertUserAdapter,
-                                            FindZipCodeAdapter findZipCodeAdapter){
-        return new InsertUserUseCase(insertUserAdapter, findZipCodeAdapter);
+                                            FindZipCodeAdapter findZipCodeAdapter,
+                                            FindUserByEmailOutputPort findUserByEmailOutputPort){
+        return new InsertUserUseCase(insertUserAdapter, findZipCodeAdapter, findUserByEmailOutputPort);
     }
 
     @Bean
