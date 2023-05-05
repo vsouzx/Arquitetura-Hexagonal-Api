@@ -26,8 +26,6 @@ public class InsertUserUseCase implements InsertUserInputPort {
     @Override
     public void insertUser(User user, String zipCode) throws Exception{
 
-        findUserByEmailOutputPort.find(user);
-
         ZipCode zipCodeResponse;
         //buscar zipCode, se for inválido, retornar exceção
         try {

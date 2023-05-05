@@ -1,6 +1,5 @@
 package br.com.souza.hexagonal_arch.todoapi.config.authorization;
 
-import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByIdOutputPort;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -9,16 +8,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JWTConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     private final TokenProvider tokenProvider;
-    private final FindUserByIdOutputPort findUserByIdOutputPort;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    public JWTConfigurer(TokenProvider tokenProvider, FindUserByIdOutputPort findUserByIdOutputPort) {
+    public JWTConfigurer(TokenProvider tokenProvider,
+                         UserDetailsServiceImpl userDetailsService) {
         this.tokenProvider = tokenProvider;
-        this.findUserByIdOutputPort = findUserByIdOutputPort;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
     public void configure(HttpSecurity http) {
-        JWTFilter customFilter = new JWTFilter(findUserByIdOutputPort, tokenProvider);
+        JWTFilter customFilter = new JWTFilter(tokenProvider, userDetailsService);
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

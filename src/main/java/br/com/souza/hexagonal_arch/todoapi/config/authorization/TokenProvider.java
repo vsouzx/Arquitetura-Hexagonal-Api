@@ -1,8 +1,7 @@
 package br.com.souza.hexagonal_arch.todoapi.config.authorization;
 
 import br.com.souza.hexagonal_arch.todoapi.adapters.out.database.model.UserCollection;
-import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
-import br.com.souza.hexagonal_arch.todoapi.config.authorization.dto.AuthenticationTokenResponse;
+import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.AuthenticationTokenResponse;
 import br.com.souza.hexagonal_arch.todoapi.config.properties.SecurityProperties;
 import com.nimbusds.jwt.SignedJWT;
 import io.jsonwebtoken.Claims;
@@ -41,7 +40,7 @@ public class TokenProvider {
 
         final String auth = Jwts.builder()
                 .setIssuer(ISSUER)
-                .setSubject(user.getId())
+                .setSubject(user.getEmail())
                 .setIssuedAt(now)
                 .setNotBefore(now)
                 .setExpiration(exp)

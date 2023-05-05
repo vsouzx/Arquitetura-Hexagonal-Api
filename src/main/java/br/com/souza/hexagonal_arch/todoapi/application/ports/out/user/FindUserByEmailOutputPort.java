@@ -4,5 +4,5 @@ import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 
 public interface FindUserByEmailOutputPort {
 
-    User find(User user) throws Exception;
+    User find(String email) throws Exception;
 }

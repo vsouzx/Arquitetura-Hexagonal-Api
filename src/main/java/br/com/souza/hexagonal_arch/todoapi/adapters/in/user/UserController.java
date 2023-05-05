@@ -1,8 +1,11 @@
 package br.com.souza.hexagonal_arch.todoapi.adapters.in.user;
 
+import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.AuthenticationTokenResponse;
+import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.LoginRequest;
 import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.UserRequest;
 import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.UserAuthenticationInputPort;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,9 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final InsertUserInputPort insertUserInputPort;
+    private final UserAuthenticationInputPort userAuthenticationInputPort;
 
-    public UserController(InsertUserInputPort insertUserInputPort) {
+    public UserController(InsertUserInputPort insertUserInputPort,
+                          UserAuthenticationInputPort userAuthenticationInputPort) {
         this.insertUserInputPort = insertUserInputPort;
+        this.userAuthenticationInputPort = userAuthenticationInputPort;
     }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -28,4 +34,10 @@ public class UserController {
         insertUserInputPort.insertUser(user, userRequest.getZipCode());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/auth", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AuthenticationTokenResponse> auth(@Valid @RequestBody LoginRequest loginRequest) throws Exception{
+        return new ResponseEntity<>(userAuthenticationInputPort.authenticate(loginRequest), HttpStatus.OK);
+    }
+
 }

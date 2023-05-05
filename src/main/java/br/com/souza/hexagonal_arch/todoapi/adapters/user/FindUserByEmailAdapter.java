@@ -5,6 +5,7 @@ import br.com.souza.hexagonal_arch.todoapi.adapters.out.database.repository.User
 import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByEmailOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.EmailAlreadyRegisteredException;
+import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.UserNotExistsException;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
@@ -18,19 +19,21 @@ public class FindUserByEmailAdapter implements FindUserByEmailOutputPort {
     }
 
     @Override
-    public User find(User user) throws Exception {
-        Optional<UserCollection> possibleUser = userCollectionRepository.findByEmail(user.getEmail());
+    public User find(String email) throws Exception {
+        Optional<UserCollection> possibleUser = userCollectionRepository.findByEmail(email);
 
-        if(possibleUser.isPresent()){
-            throw new EmailAlreadyRegisteredException(user.getEmail());
+        if(possibleUser.isEmpty()){
+            throw new UserNotExistsException(email);
         }
+
+        UserCollection user = possibleUser.get();
 
         return new User(user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getPassword(),
                 user.getEmail(),
-                user.getValidEmail(),
+                user.getIsValidEmail(),
                 user.getStreet(),
                 user.getLocality());
     }

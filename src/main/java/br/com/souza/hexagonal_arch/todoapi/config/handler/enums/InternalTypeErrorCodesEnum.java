@@ -6,7 +6,9 @@ public enum InternalTypeErrorCodesEnum {
     E400001("An user with this e-mail already exists: %s"),
     E400002("Invalid zipCode: %s"),
     E400003("Bad Request to: %s."),
-    E400004("This user not exists: %s."),;
+    E400004("This user not exists: %s."),
+    E400005("Invalid credentials."),
+    E400006("Your email isn´t confirmed yet. Please, check the security code sent to your email.");
 
     private final String message;
 

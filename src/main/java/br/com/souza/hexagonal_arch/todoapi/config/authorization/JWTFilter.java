@@ -1,15 +1,11 @@
 package br.com.souza.hexagonal_arch.todoapi.config.authorization;
 
-import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByIdOutputPort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.Collection;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
@@ -18,12 +14,13 @@ import org.springframework.web.filter.GenericFilterBean;
 public class JWTFilter extends GenericFilterBean {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-    private final FindUserByIdOutputPort findUserByIdOutputPort;
     private final TokenProvider tokenProvider;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    public JWTFilter(FindUserByIdOutputPort findUserByIdOutputPort, TokenProvider tokenProvider) {
-        this.findUserByIdOutputPort = findUserByIdOutputPort;
+    public JWTFilter(TokenProvider tokenProvider,
+                     UserDetailsServiceImpl userDetailsService) {
         this.tokenProvider = tokenProvider;
+        this.userDetailsService = userDetailsService;
     }
 
     @SneakyThrows
@@ -36,46 +33,9 @@ public class JWTFilter extends GenericFilterBean {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         } else if (StringUtils.hasText(jwt) && this.tokenProvider.isValid(jwt, servletResponse)) {
-            final String id = tokenProvider.getUsernameFromToken(jwt);
+            final String email = tokenProvider.getUsernameFromToken(jwt);
 
-            User user = findUserByIdOutputPort.find(id);
-
-            UserDetails userDetails = new UserDetails() {
-                @Override
-                public Collection<? extends GrantedAuthority> getAuthorities() {
-                    return null;
-                }
-
-                @Override
-                public String getPassword() {
-                    return user.getPassword();
-                }
-
-                @Override
-                public String getUsername() {
-                    return user.getEmail();
-                }
-
-                @Override
-                public boolean isAccountNonExpired() {
-                    return true;
-                }
-
-                @Override
-                public boolean isAccountNonLocked() {
-                    return true;
-                }
-
-                @Override
-                public boolean isCredentialsNonExpired() {
-                    return true;
-                }
-
-                @Override
-                public boolean isEnabled() {
-                    return true;
-                }
-            };
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
