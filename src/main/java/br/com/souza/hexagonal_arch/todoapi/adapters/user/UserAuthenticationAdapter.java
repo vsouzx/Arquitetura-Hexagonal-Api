@@ -3,7 +3,6 @@ package br.com.souza.hexagonal_arch.todoapi.adapters.user;
 import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.AuthenticationTokenResponse;
 import br.com.souza.hexagonal_arch.todoapi.adapters.in.user.dto.LoginRequest;
 import br.com.souza.hexagonal_arch.todoapi.adapters.out.database.model.UserCollection;
-import br.com.souza.hexagonal_arch.todoapi.adapters.out.database.repository.UserCollectionRepository;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.UserAuthenticationOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.config.authorization.TokenProvider;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.BadCredencialsException;
@@ -18,14 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAuthenticationAdapter implements UserAuthenticationOutputPort {
 
-    private final UserCollectionRepository userCollectionRepository;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
 
-    public UserAuthenticationAdapter(UserCollectionRepository userCollectionRepository,
-                                     AuthenticationManager authenticationManager,
+    public UserAuthenticationAdapter(AuthenticationManager authenticationManager,
                                      TokenProvider tokenProvider) {
-        this.userCollectionRepository = userCollectionRepository;
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
     }

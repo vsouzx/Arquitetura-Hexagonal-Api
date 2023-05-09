@@ -1,11 +1,8 @@
 package br.com.souza.hexagonal_arch.todoapi.application.core.usecases.task;
 
-import br.com.souza.hexagonal_arch.todoapi.application.core.domains.Task;
-import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.task.InsertTaskInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.task.InsertTaskOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByIdOutputPort;
-import java.util.Optional;
 
 public class InsertTaskUseCase implements InsertTaskInputPort {
 

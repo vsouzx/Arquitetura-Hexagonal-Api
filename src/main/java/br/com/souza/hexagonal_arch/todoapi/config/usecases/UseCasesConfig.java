@@ -4,9 +4,9 @@ import br.com.souza.hexagonal_arch.todoapi.adapters.task.InsertTaskAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.FindUserByIdAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.FindZipCodeAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.InsertUserAdapter;
+import br.com.souza.hexagonal_arch.todoapi.adapters.user.SendEmailForConfirmationAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.UserAuthenticationAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.UserConfirmSecurityCodeAdapter;
-import br.com.souza.hexagonal_arch.todoapi.adapters.user.UserMailConfirmationAdapter;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.task.InsertTaskUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user.AuthenticateUserUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user.InsertUserUseCase;
@@ -24,8 +24,8 @@ public class UseCasesConfig {
     @Bean
     InsertUserInputPort insertUserInputPort(InsertUserAdapter insertUserAdapter,
                                             FindZipCodeAdapter findZipCodeAdapter,
-                                            UserMailConfirmationAdapter userMailConfirmationAdapter) {
-        return new InsertUserUseCase(insertUserAdapter, findZipCodeAdapter, userMailConfirmationAdapter);
+                                            SendEmailForConfirmationAdapter sendEmailForConfirmationAdapter) {
+        return new InsertUserUseCase(insertUserAdapter, findZipCodeAdapter, sendEmailForConfirmationAdapter);
     }
 
     @Bean

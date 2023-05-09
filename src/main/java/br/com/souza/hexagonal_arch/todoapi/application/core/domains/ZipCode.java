@@ -1,4 +1,4 @@
-package br.com.souza.hexagonal_arch.todoapi.application.core.dtos;
+package br.com.souza.hexagonal_arch.todoapi.application.core.domains;
 
 public class ZipCode {
 
