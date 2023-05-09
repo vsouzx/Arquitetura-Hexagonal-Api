@@ -44,9 +44,9 @@ public class UserAuthenticationAdapter implements UserAuthenticationOutputPort {
             throw new BadCredencialsException();
         }
 
-        /*if(!user.getIsValidEmail()){
+        if(!user.getIsValidEmail()){
             throw new NotConfirmedEmailException();
-        }*/
+        }
 
         return tokenProvider.generateToken(authentication);
     }

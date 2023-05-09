@@ -3,28 +3,31 @@ package br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user;
 import br.com.souza.hexagonal_arch.todoapi.application.core.domains.User;
 import br.com.souza.hexagonal_arch.todoapi.application.core.dtos.ZipCode;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
-import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindUserByEmailOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.FindZipCodeOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.InsertUserOutputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.user.UserMailConfirmationOutputPort;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.BadRequestException;
 import br.com.souza.hexagonal_arch.todoapi.config.handler.exceptions.InvalidZipCodeException;
+import java.util.Random;
 
 public class InsertUserUseCase implements InsertUserInputPort {
 
     private final InsertUserOutputPort insertUserOutputPort;
     private final FindZipCodeOutputPort findZipCodeOutputPort;
-    private final FindUserByEmailOutputPort findUserByEmailOutputPort;
+    private final UserMailConfirmationOutputPort userMailConfirmationOutputPort;
 
     public InsertUserUseCase(InsertUserOutputPort insertUserOutputPort,
                              FindZipCodeOutputPort findZipCodeOutputPort,
-                             FindUserByEmailOutputPort findUserByEmailOutputPort) {
+                             UserMailConfirmationOutputPort userMailConfirmationOutputPort) {
         this.insertUserOutputPort = insertUserOutputPort;
         this.findZipCodeOutputPort = findZipCodeOutputPort;
-        this.findUserByEmailOutputPort = findUserByEmailOutputPort;
+        this.userMailConfirmationOutputPort = userMailConfirmationOutputPort;
     }
 
     @Override
     public void insertUser(User user, String zipCode) throws Exception{
+
+        final String confirmationCode = generateRandomCode();
 
         ZipCode zipCodeResponse;
         //buscar zipCode, se for inválido, retornar exceção
@@ -36,7 +39,15 @@ public class InsertUserUseCase implements InsertUserInputPort {
 
         user.setStreet(zipCodeResponse.getStreet());
         user.setLocality(zipCodeResponse.getLocality());
+        user.setConfirmationCode(confirmationCode);
 
         insertUserOutputPort.save(user);
+        userMailConfirmationOutputPort.sendMailConfirmation(user.getFirstName(), user.getEmail(), confirmationCode);
+    }
+
+    private String generateRandomCode(){
+        Random rnd = new Random();
+        int randomNumber = rnd.nextInt(999999);
+        return String.format("%06d", randomNumber);
     }
 }

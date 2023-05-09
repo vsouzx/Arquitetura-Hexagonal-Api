@@ -15,10 +15,10 @@ public class JWTFilter extends GenericFilterBean {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     private final TokenProvider tokenProvider;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsConfig userDetailsService;
 
     public JWTFilter(TokenProvider tokenProvider,
-                     UserDetailsServiceImpl userDetailsService) {
+                     UserDetailsConfig userDetailsService) {
         this.tokenProvider = tokenProvider;
         this.userDetailsService = userDetailsService;
     }

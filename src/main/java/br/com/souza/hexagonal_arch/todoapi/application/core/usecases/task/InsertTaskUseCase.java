@@ -19,10 +19,10 @@ public class InsertTaskUseCase implements InsertTaskInputPort {
     }
 
     @Override
-    public void insert(Task task) throws Exception {
+    public void insert(String message, String userId) throws Exception {
         //buscar user por Id para garantir que ele exista
-        findUserByIdOutputPort.find(task.getUserId());
+        findUserByIdOutputPort.find(userId);
 
-        insertTaskOutputPort.save(task);
+        insertTaskOutputPort.save(message, userId);
     }
 }

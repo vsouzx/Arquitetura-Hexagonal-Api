@@ -16,11 +16,11 @@ public class InsertTaskAdapter implements InsertTaskOutputPort {
     }
 
     @Override
-    public void save(Task task) {
+    public void save(String message, String userId) {
         taskCollectionRepository.save(TaskCollection.builder()
-                .message(task.getMessage())
+                .message(message)
                 .isDone(false)
-                .userId(task.getUserId())
+                .userId(userId)
                 .build());
     }
 

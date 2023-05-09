@@ -24,6 +24,11 @@ public class Task {
         this.userId = userId;
     }
 
+    public Task(String message) {
+        this.message = message;
+        this.isDone = false;
+    }
+
     public String getId() {
         return id;
     }

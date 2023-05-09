@@ -20,11 +20,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final TokenProvider tokenProvider;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsConfig userDetailsService;
 
     private static final String[] AUTH_WHITELIST = { // URLs com acesso liberado
             "/todo/v1/user/register",
-            "/todo/v1/user/auth"
+            "/todo/v1/user/auth",
+            "/todo/v1/user/codeconfirmation"
     };
 
     @Bean

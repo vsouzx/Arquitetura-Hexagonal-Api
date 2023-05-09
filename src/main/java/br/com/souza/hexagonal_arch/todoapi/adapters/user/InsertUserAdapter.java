@@ -37,6 +37,7 @@ public class InsertUserAdapter implements InsertUserOutputPort {
                 .isValidEmail(false)
                 .street(user.getStreet())
                 .locality(user.getLocality())
+                .confirmationCode(user.getConfirmationCode())
                 .build());
     }
 }

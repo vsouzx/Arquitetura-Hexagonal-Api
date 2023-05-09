@@ -8,7 +8,9 @@ public enum InternalTypeErrorCodesEnum {
     E400003("Bad Request to: %s."),
     E400004("This user not exists: %s."),
     E400005("Invalid credentials."),
-    E400006("Your email isn´t confirmed yet. Please, check the security code sent to your email.");
+    E400006("Your email isn´t confirmed yet. Please, check the security code sent to your email."),
+    E400007("Invalid confirmation code."),
+    E400008("Your email is already confirmed.");
 
     private final String message;
 

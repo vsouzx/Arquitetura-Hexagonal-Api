@@ -28,6 +28,7 @@ public class UserCollection implements UserDetails {
     private Boolean isValidEmail;
     private String street;
     private String locality;
+    private String confirmationCode;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

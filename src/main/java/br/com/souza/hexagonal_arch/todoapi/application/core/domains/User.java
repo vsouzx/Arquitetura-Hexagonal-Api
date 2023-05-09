@@ -10,6 +10,7 @@ public class User {
     private Boolean isValidEmail;
     private String street;
     private String locality;
+    private String confirmationCode;
 
     public User() {
     }
@@ -105,5 +106,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmationCode() {
+        return confirmationCode;
+    }
+
+    public void setConfirmationCode(String confirmationCode) {
+        this.confirmationCode = confirmationCode;
     }
 }

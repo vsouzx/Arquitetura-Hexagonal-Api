@@ -4,5 +4,5 @@ import br.com.souza.hexagonal_arch.todoapi.application.core.domains.Task;
 
 public interface InsertTaskOutputPort {
 
-    void save(Task task);
+    void save(String message, String userId);
 }
