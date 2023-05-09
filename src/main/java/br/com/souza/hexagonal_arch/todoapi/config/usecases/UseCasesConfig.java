@@ -7,14 +7,17 @@ import br.com.souza.hexagonal_arch.todoapi.adapters.user.InsertUserAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.SendEmailForConfirmationAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.UserAuthenticationAdapter;
 import br.com.souza.hexagonal_arch.todoapi.adapters.user.UserConfirmSecurityCodeAdapter;
+import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.task.FindAllTasksUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.task.InsertTaskUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user.AuthenticateUserUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user.InsertUserUseCase;
 import br.com.souza.hexagonal_arch.todoapi.application.core.usecases.user.UserConfirmSecurityCodeUseCase;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.in.task.FindAllTasksInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.task.InsertTaskInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.InsertUserInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.UserAuthenticationInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.user.UserConfirmSecurityCodeInputPort;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.out.task.FindAllTasksByUserOutputPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -42,5 +45,10 @@ public class UseCasesConfig {
     @Bean
     UserConfirmSecurityCodeInputPort userConfirmSecurityCodeInputPort(UserConfirmSecurityCodeAdapter userConfirmSecurityCodeAdapter) {
         return new UserConfirmSecurityCodeUseCase(userConfirmSecurityCodeAdapter);
+    }
+
+    @Bean
+    FindAllTasksInputPort findAllTasksInputPort(FindAllTasksByUserOutputPort findAllTasksByUserOutputPort) {
+        return new FindAllTasksUseCase(findAllTasksByUserOutputPort);
     }
 }

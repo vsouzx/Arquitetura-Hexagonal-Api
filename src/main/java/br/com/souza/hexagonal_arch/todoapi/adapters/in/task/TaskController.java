@@ -2,8 +2,11 @@ package br.com.souza.hexagonal_arch.todoapi.adapters.in.task;
 
 import br.com.souza.hexagonal_arch.todoapi.adapters.in.task.dto.TaskRequest;
 import br.com.souza.hexagonal_arch.todoapi.adapters.out.database.model.UserCollection;
+import br.com.souza.hexagonal_arch.todoapi.application.core.domains.Task;
+import br.com.souza.hexagonal_arch.todoapi.application.ports.in.task.FindAllTasksInputPort;
 import br.com.souza.hexagonal_arch.todoapi.application.ports.in.task.InsertTaskInputPort;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskController {
 
     private final InsertTaskInputPort insertTaskInputPort;
+    private final FindAllTasksInputPort findAllTasksInputPort;
 
-    public TaskController(InsertTaskInputPort insertTaskInputPort) {
+    public TaskController(InsertTaskInputPort insertTaskInputPort,
+                          FindAllTasksInputPort findAllTasksInputPort) {
         this.insertTaskInputPort = insertTaskInputPort;
+        this.findAllTasksInputPort = findAllTasksInputPort;
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -34,10 +40,9 @@ public class TaskController {
     }
 
     @GetMapping(value = "/all", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> register() throws Exception{
+    public ResponseEntity<List<Task>> register() throws Exception{
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserCollection userCollection = (UserCollection) authentication.getPrincipal();
-        //insertTaskInputPort.insert(userCollection.getId());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(findAllTasksInputPort.findAll(userCollection.getId()), HttpStatus.OK);
     }
 }
