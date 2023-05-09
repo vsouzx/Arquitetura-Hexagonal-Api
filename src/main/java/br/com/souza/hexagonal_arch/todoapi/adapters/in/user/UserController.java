@@ -35,8 +35,7 @@ public class UserController {
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> register(@Valid @RequestBody UserRequest userRequest) throws Exception{
-        User user = new User(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getEmail(), userRequest.getPassword());
-        insertUserInputPort.insertUser(user, userRequest.getZipCode());
+        insertUserInputPort.insertUser(new User(userRequest.getFirstName(), userRequest.getLastName(), userRequest.getEmail(), userRequest.getPassword()), userRequest.getZipCode());
         return new ResponseEntity<>("A confirmation code was sent to your e-mail. Please, check it out and confirm by the '/todo/v1/user/codeconfirmation' endpoint.", HttpStatus.CREATED);
     }
 

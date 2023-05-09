@@ -22,8 +22,6 @@ public class ReceiveMailForConfirmationConsumer {
     @KafkaListener(topics = TOPIC, groupId = GROUP)
     public void receiveEmail(String email) throws Exception {
         log.info("Consumer: e-mail recebido: {} ", email);
-        if(email != null || !email.isBlank()){
-            userMailConfirmationOutputPort.sendMailConfirmation(email);
-        }
+        userMailConfirmationOutputPort.sendMailConfirmation(email);
     }
 }
